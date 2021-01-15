@@ -58,8 +58,11 @@ dependencies {
     implementation Deps.RxJava.kotlin
     implementation Deps.rxRelay
 
-
-    testImplementation 'junit:junit:4.+'
+    // Testing
+    testImplementation Deps.Test.junit
+    testImplementation Deps.Test.kotest
+    testImplementation Deps.Test.kotestAssertion
+    testImplementation Deps.Test.mockk
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }

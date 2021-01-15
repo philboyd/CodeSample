@@ -38,6 +38,13 @@ object Deps {
 
     val rxRelay = dependency("com.jakewharton.rxrelay3:rxrelay", Versions.relay)
 
+    object Test {
+        val junit = dependency("junit:junit", Versions.junit)
+        val kotest = dependency("io.kotest:kotest-runner-junit5-jvm", Versions.kotest)
+        val kotestAssertion = dependency("io.kotest:kotest-assertions-core-jvm", Versions.kotest)
+        val mockk = dependency("io.mockk:mockk", Versions.mockk)
+    }
+
     val viewpager2 = dependency("androidx.viewpager2:viewpager2", Versions.viewpager2)
 
 }
@@ -56,9 +63,12 @@ object Versions {
     const val appcomat = "1.2.0"
     const val constraintLayout = "2.0.4"
     const val epoxy = "4.3.1"
+    const val junit = "4.13"
+    const val kotest = "4.3.2"
     const val kotlin = "1.3.70"
     const val lifecycle = "2.2.0"
     const val material = "1.3.0-alpha02"
+    const val mockk = "1.10.4"
     const val navigation = "2.3.0"
     const val relay = "3.0.0"
     const val rxAndroid = "3.0.0"
