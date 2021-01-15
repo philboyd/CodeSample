@@ -1,7 +1,8 @@
-package com.philboyd.okcupid
+package com.philboyd.okcupid.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.philboyd.okcupid.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
