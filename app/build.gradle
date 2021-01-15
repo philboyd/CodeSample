@@ -1,0 +1,65 @@
+import dependencies.Deps
+
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        applicationId "com.philboyd.okcupid"
+        minSdkVersion Deps.Apk.minSdkVersion
+        targetSdkVersion Deps.Apk.targetSdkVersion
+        versionCode Deps.Apk.versionCode
+        versionName Deps.Apk.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation Deps.kotlin
+
+    // Android
+    implementation Deps.androidCore
+    implementation Deps.appcompat
+    implementation Deps.material
+    implementation Deps.constraintLayout
+    implementation Deps.viewpager2
+
+    // Epoxy
+    implementation Deps.Epoxy.base
+    implementation Deps.Epoxy.paging
+
+    // RxJava
+    implementation Deps.RxJava.android
+    implementation Deps.RxJava.core
+    implementation Deps.RxJava.kotlin
+    implementation Deps.rxRelay
+
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
