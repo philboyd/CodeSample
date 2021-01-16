@@ -52,6 +52,10 @@ dependencies {
     implementation Deps.Epoxy.base
     implementation Deps.Epoxy.paging
 
+    // Navigation
+    implementation Deps.Navigation.fragment
+    implementation Deps.Navigation.ui
+
     // RxJava
     implementation Deps.RxJava.android
     implementation Deps.RxJava.core
