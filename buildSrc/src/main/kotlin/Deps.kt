@@ -24,6 +24,7 @@ object Deps {
     val kotlin = dependency("org.jetbrains.kotlin:kotlin-stdlib-jdk7", Versions.kotlin)
 
     val material = dependency("com.google.android.material:material", Versions.material)
+    val materialValues = dependency("blue.aodev:material-values", Versions.materialValues)
 
     object Navigation : Group("androidx.navigation") {
         val fragment = withArtifact("navigation-fragment-ktx", Versions.navigation)
@@ -68,6 +69,7 @@ object Versions {
     const val kotlin = "1.3.70"
     const val lifecycle = "2.2.0"
     const val material = "1.3.0-alpha02"
+    const val materialValues = "1.1.1"
     const val mockk = "1.10.4"
     const val navigation = "2.3.0"
     const val relay = "3.0.0"

@@ -45,6 +45,7 @@ dependencies {
     implementation Deps.androidCore
     implementation Deps.appcompat
     implementation Deps.material
+    implementation Deps.materialValues
     implementation Deps.constraintLayout
     implementation Deps.viewpager2
 
