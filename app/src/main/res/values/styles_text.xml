@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextBody1" parent="@style/TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/font_main</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextBody2" parent="@style/TextAppearance.AppCompat.Body2">
+        <item name="android:textColor">@color/font_subdued</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

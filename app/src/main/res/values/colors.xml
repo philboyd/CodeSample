@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#949494</color>
+    <color name="yellow">#FFFEB3</color>
+
+    <color name="font_main">@color/black</color>
+    <color name="font_subdued">#949494</color>
+    <color name="people_card_liked">@color/yellow</color>
+    <color name="people_card_not_liked">@color/white</color>
 </resources>

@@ -30,7 +30,7 @@ object Deps {
         val ui = withArtifact("navigation-ui-ktx", Versions.navigation)
     }
 
-    object RxJava : Group("io.reactivex.rxjava2") {
+    object RxJava : Group("io.reactivex.rxjava3") {
         val android = withArtifact("rxandroid", Versions.rxAndroid)
         val core = withArtifact("rxjava", Versions.rxJava)
         val kotlin = withArtifact("rxkotlin", Versions.rxKotlin)
