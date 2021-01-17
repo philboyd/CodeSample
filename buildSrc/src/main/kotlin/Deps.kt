@@ -13,6 +13,8 @@ object Deps {
 
     val androidCore = dependency("androidx.core:core-ktx", Versions.androidCore)
 
+    val coil = dependency("io.coil-kt:coil", Versions.coil)
+
     val constraintLayout =
         dependency("androidx.constraintlayout:constraintlayout", Versions.constraintLayout)
 
@@ -27,17 +29,24 @@ object Deps {
     val materialValues = dependency("blue.aodev:material-values", Versions.materialValues)
 
     object Navigation : Group("androidx.navigation") {
-        val fragment = withArtifact("navigation-fragment-ktx", Versions.navigation)
-        val ui = withArtifact("navigation-ui-ktx", Versions.navigation)
+        val fragment = Navigation.withArtifact("navigation-fragment-ktx", Versions.navigation)
+        val ui = Navigation.withArtifact("navigation-ui-ktx", Versions.navigation)
     }
 
-    object RxJava : Group("io.reactivex.rxjava3") {
+    object Paging : Group("androidx.paging") {
+        val core = Paging.withArtifact("paging-runtime", Versions.paging)
+        val rx = Paging.withArtifact("paging-rxjava2", Versions.paging)
+    }
+
+    val remoteData = dependency("'com.github.torresmi:remotedata", Versions.remoteData)
+
+    object RxJava : Group("io.reactivex.rxjava2") {
         val android = withArtifact("rxandroid", Versions.rxAndroid)
         val core = withArtifact("rxjava", Versions.rxJava)
         val kotlin = withArtifact("rxkotlin", Versions.rxKotlin)
     }
 
-    val rxRelay = dependency("com.jakewharton.rxrelay3:rxrelay", Versions.relay)
+    val rxRelay = dependency("com.jakewharton.rxrelay2:rxrelay", Versions.relay)
 
     object Test {
         val junit = dependency("junit:junit", Versions.junit)
@@ -62,6 +71,7 @@ private fun dependency(path: String, version: String, extension: String? = null)
 object Versions {
     const val androidCore = "1.3.2"
     const val appcomat = "1.2.0"
+    const val coil = "1.1.1"
     const val constraintLayout = "2.0.4"
     const val epoxy = "4.1.0"
     const val junit = "4.13"
@@ -72,10 +82,12 @@ object Versions {
     const val materialValues = "1.1.1"
     const val mockk = "1.10.4"
     const val navigation = "2.3.0"
-    const val relay = "3.0.0"
-    const val rxAndroid = "3.0.0"
-    const val rxJava = "3.0.9"
-    const val rxKotlin = "3.0.1"
+    const val paging = "3.0.0-alpha12"
+    const val relay = "2.1.1"
+    const val remoteData = "1.1"
+    const val rxAndroid = "2.1.1"
+    const val rxJava = "2.2.20"
+    const val rxKotlin = "2.4.0"
     const val viewpager2 = "1.0.0"
 
 }
