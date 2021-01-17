@@ -4,6 +4,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -46,7 +47,9 @@ dependencies {
     implementation Deps.constraintLayout
     implementation Deps.viewpager2
 
-    implementation Deps.coil
+    // Glide
+    implementation Deps.Glide.core
+    kapt Deps.Glide.compiler
 
     // Epoxy
     implementation Deps.Epoxy.base

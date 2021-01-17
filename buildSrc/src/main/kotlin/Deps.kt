@@ -13,14 +13,18 @@ object Deps {
 
     val androidCore = dependency("androidx.core:core-ktx", Versions.androidCore)
 
-    val coil = dependency("io.coil-kt:coil", Versions.coil)
-
     val constraintLayout =
         dependency("androidx.constraintlayout:constraintlayout", Versions.constraintLayout)
 
     object Epoxy : Group("com.airbnb.android") {
         val base = withArtifact("epoxy", Versions.epoxy)
         val paging = withArtifact("epoxy-paging", Versions.epoxy)
+    }
+
+
+    object Glide : Group("com.github.bumptech.glide") {
+        val core = withArtifact("glide", Versions.glide)
+        val compiler = withArtifact("compiler", Versions.glide)
     }
 
     val kotlin = dependency("org.jetbrains.kotlin:kotlin-stdlib-jdk7", Versions.kotlin)
@@ -71,9 +75,9 @@ private fun dependency(path: String, version: String, extension: String? = null)
 object Versions {
     const val androidCore = "1.3.2"
     const val appcomat = "1.2.0"
-    const val coil = "1.1.1"
     const val constraintLayout = "2.0.4"
     const val epoxy = "4.1.0"
+    const val glide = "4.11.0"
     const val junit = "4.13"
     const val kotest = "4.3.2"
     const val kotlin = "1.4.10"
