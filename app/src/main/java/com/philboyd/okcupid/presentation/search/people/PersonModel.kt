@@ -26,7 +26,7 @@ data class PersonModel(
             personStats.text = "${person.age} ${person.city}, ${person.region}"
             matchPercentage.text = "${person.matchPercentage}% Match"
             personUsername.text = person.userName
-            
+
             Glide.with(context)
                 .load(person.image)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_DURATION))
