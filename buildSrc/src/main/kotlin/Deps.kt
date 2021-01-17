@@ -42,7 +42,7 @@ object Deps {
         val rx = Paging.withArtifact("paging-rxjava2", Versions.paging)
     }
 
-    val remoteData = dependency("'com.github.torresmi:remotedata", Versions.remoteData)
+    val remoteData = dependency("com.github.torresmi:remotedata", Versions.remoteData)
 
     object RxJava : Group("io.reactivex.rxjava2") {
         val android = withArtifact("rxandroid", Versions.rxAndroid)

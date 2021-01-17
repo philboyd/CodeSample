@@ -1,8 +1,9 @@
 package com.philboyd.okcupid.presentation.core
 
-import com.jakewharton.rxrelay3.BehaviorRelay
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.disposables.CompositeDisposable
+import com.jakewharton.rxrelay2.BehaviorRelay
+import io.reactivex.Observable
+import io.reactivex.disposables.CompositeDisposable
+
 import kotlin.properties.Delegates
 
 abstract class ViewModel<ViewState : Any, Action : Any>(
