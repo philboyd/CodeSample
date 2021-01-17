@@ -1,4 +1,4 @@
-package com.philboyd.okcupid.domain
+package com.philboyd.okcupid.domain.core
 
 import io.reactivex.Observable
 

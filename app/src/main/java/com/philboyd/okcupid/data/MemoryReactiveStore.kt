@@ -2,9 +2,9 @@ package com.philboyd.okcupid.data
 
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay
-import com.philboyd.okcupid.domain.Option
-import com.philboyd.okcupid.domain.ReactiveStore
-import com.philboyd.okcupid.domain.toOption
+import com.philboyd.okcupid.domain.core.Option
+import com.philboyd.okcupid.domain.core.ReactiveStore
+import com.philboyd.okcupid.domain.core.toOption
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.ConcurrentHashMap
