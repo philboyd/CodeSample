@@ -16,7 +16,7 @@ class PeoplePagedController(
             buildPlaceholder(currentPosition)
         } else {
             PersonModel(item, personCallBack)
-                .id(item.userName)
+                .id(item.id)
         }
     }
 

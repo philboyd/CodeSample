@@ -10,7 +10,7 @@ class PeopleController(
     override fun buildModels(data: List<Person>?) {
         data?.forEach {
             PersonModel(it, personCallBack)
-                .id(it.userName)
+                .id(it.id)
                 .addTo(this)
         }
     }
