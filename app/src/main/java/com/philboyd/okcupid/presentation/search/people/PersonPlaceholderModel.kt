@@ -1,27 +1,24 @@
 package com.philboyd.okcupid.presentation.search.people
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import com.airbnb.epoxy.EpoxyModelWithView
-import com.philboyd.okcupid.databinding.ItemPersonBinding
+import com.philboyd.okcupid.R
+import com.philboyd.okcupid.presentation.core.inflateAs
 
 class PersonPlaceholderModel : EpoxyModelWithView<CardView>() {
-
-    private lateinit var binding: ItemPersonBinding
 
     override fun bind(view: CardView) {
         super.bind(view)
 
-        with(binding.root) {
+        with(view) {
             isClickable = false
             isFocusable = false
         }
     }
 
     override fun buildView(parent: ViewGroup): CardView {
-        binding = ItemPersonBinding.inflate(LayoutInflater.from(parent.context))
-        return binding.root
+        return parent.inflateAs(R.layout.item_person)
     }
 
     override fun equals(other: Any?): Boolean {

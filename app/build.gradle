@@ -3,6 +3,7 @@ import dependencies.Deps
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -31,10 +32,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-    }
-
-    viewBinding {
-        enabled = true
     }
 }
 
