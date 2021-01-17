@@ -14,16 +14,15 @@ import remotedata.RemoteData
 
 typealias MatchesData =  RemoteData<Throwable, PagedList<Person>>
 
-class SearchViewModel(
+class SpecialBlendViewModel(
 
-) : ViewModel<SearchViewModel.ViewState, SearchViewModel.Action>(
+) : ViewModel<SpecialBlendViewModel.ViewState, SpecialBlendViewModel.Action>(
     ViewState(),
     update
 ) {
 
     data class ViewState(
-        val matches : MatchesData = RemoteData.Loading,
-        val likedPeople : RemoteData<Throwable, PagedList<Person>> = RemoteData.Loading
+        val matches : MatchesData = RemoteData.Loading
     )
 
     sealed class Action {
@@ -47,11 +46,15 @@ class SearchViewModel(
             }
             .addTo(disposables)
     }
+
+    fun toggleLike(id: Int) {
+
+    }
 }
 
-private val update : (SearchViewModel.ViewState, SearchViewModel.Action) -> SearchViewModel.ViewState = { state, action ->
+private val update : (SpecialBlendViewModel.ViewState, SpecialBlendViewModel.Action) -> SpecialBlendViewModel.ViewState = { state, action ->
     when (action) {
-        is SearchViewModel.Action.MatchDataReceived -> {
+        is SpecialBlendViewModel.Action.MatchDataReceived -> {
             state.copy(matches = action.data)
         }
     }

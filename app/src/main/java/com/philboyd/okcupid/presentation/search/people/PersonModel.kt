@@ -26,8 +26,7 @@ data class PersonModel(
             personStats.text = "${person.age} ${person.city}, ${person.region}"
             matchPercentage.text = "${person.matchPercentage}% Match"
             personUsername.text = person.userName
-
-
+            
             Glide.with(context)
                 .load(person.image)
                 .transition(DrawableTransitionOptions.withCrossFade(FADE_DURATION))
@@ -38,7 +37,7 @@ data class PersonModel(
                 if (person.isLiked) R.color.people_card_liked else R.color.people_card_not_liked
             setCardBackgroundColor(ContextCompat.getColor(view.context, backgroundColor))
 
-            setOnClickListener { callBack.onPersonPressed(person.userName) }
+            setOnClickListener { callBack.onPersonPressed(person.id) }
         }
     }
 
@@ -48,5 +47,5 @@ data class PersonModel(
 }
 
 interface PersonCallBack {
-    fun onPersonPressed(userName: String)
+    fun onPersonPressed(id: Int)
 }
