@@ -4,7 +4,9 @@ import androidx.paging.DataSource
 import androidx.paging.PagedList
 import androidx.paging.PositionalDataSource
 import androidx.paging.RxPagedListBuilder
+import com.philboyd.okcupid.domain.ObserveLikedPeopleUseCase
 import com.philboyd.okcupid.domain.Person
+import com.philboyd.okcupid.domain.ToggleLikedPersonUseCase
 import com.philboyd.okcupid.presentation.core.ViewModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,24 +14,25 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import remotedata.RemoteData
 
-typealias MatchesData =  RemoteData<Throwable, PagedList<Person>>
+typealias MatchesData = RemoteData<Throwable, PagedList<Person>>
 
 class SpecialBlendViewModel(
-
+    private val likedPersonUseCase: ObserveLikedPeopleUseCase,
+    private val toggleLikedPersonUseCase: ToggleLikedPersonUseCase
 ) : ViewModel<SpecialBlendViewModel.ViewState, SpecialBlendViewModel.Action>(
     ViewState(),
     update
 ) {
 
     data class ViewState(
-        val matches : MatchesData = RemoteData.Loading
+        val matches: MatchesData = RemoteData.Loading
     )
 
     sealed class Action {
-        data class MatchDataReceived(val data: MatchesData): Action()
+        data class MatchDataReceived(val data: MatchesData) : Action()
     }
 
-    fun start() {
+    fun stub() {
         stubPagedList(
             data,
             DEFAULT_CONFIG
@@ -52,17 +55,19 @@ class SpecialBlendViewModel(
     }
 }
 
-private val update : (SpecialBlendViewModel.ViewState, SpecialBlendViewModel.Action) -> SpecialBlendViewModel.ViewState = { state, action ->
-    when (action) {
-        is SpecialBlendViewModel.Action.MatchDataReceived -> {
-            state.copy(matches = action.data)
+private val update: (SpecialBlendViewModel.ViewState, SpecialBlendViewModel.Action) -> SpecialBlendViewModel.ViewState =
+    { state, action ->
+        when (action) {
+            is SpecialBlendViewModel.Action.MatchDataReceived -> {
+                state.copy(matches = action.data)
+            }
         }
     }
-}
 
 val data = listOf(
-    Person(userName = "Phil",
-        matchPercentage = "34",
+    Person(
+        userName = "Phil",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
@@ -70,8 +75,9 @@ val data = listOf(
         image = "https://k1.okccdn.com/php/load_okc_image.php/images/640x560/640x560/0x0/0x0/2/17436090354355705210.jpg"
     ),
 
-    Person(userName = "Philb",
-        matchPercentage = "34",
+    Person(
+        userName = "Philb",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
@@ -79,8 +85,9 @@ val data = listOf(
         image = "https://k0.okccdn.com/php/load_okc_image.php/images/120x120/120x120/36x36/684x684/2/15743311334557165678.jpg"
     ),
 
-    Person(userName = "Phil3",
-        matchPercentage = "34",
+    Person(
+        userName = "Phil3",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
@@ -88,104 +95,117 @@ val data = listOf(
         image = "https://k0.okccdn.com/php/load_okc_image.php/images/120x120/120x120/36x36/684x684/2/15743311334557165678.jpg"
     ),
 
-    Person(userName = "Phild",
-        matchPercentage = "34",
+    Person(
+        userName = "Phild",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = "https://k0.okccdn.com/php/load_okc_image.php/images/120x120/120x120/36x36/684x684/2/15743311334557165678.jpg"
     ),
-    Person(userName = "Phila",
-        matchPercentage = "34",
+    Person(
+        userName = "Phila",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = "https://k0.okccdn.com/php/load_okc_image.php/images/120x120/120x120/36x36/684x684/2/15743311334557165678.jpg"
     ),
-    Person(userName = "Phild",
-        matchPercentage = "34",
+    Person(
+        userName = "Phild",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = ""
     ),
-    Person(userName = "Philz",
-        matchPercentage = "34",
+    Person(
+        userName = "Philz",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = ""
     ),
-    Person(userName = "Philx",
-        matchPercentage = "34",
+    Person(
+        userName = "Philx",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = ""
     ),
-    Person(userName = "Phildc",
-        matchPercentage = "34",
+    Person(
+        userName = "Phildc",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = ""
     ),
-    Person(userName = "Phildv",
-        matchPercentage = "34",
+    Person(
+        userName = "Phildv",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = ""
     ),
-    Person(userName = "Phildb",
-        matchPercentage = "34",
+    Person(
+        userName = "Phildb",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = ""
     ),
-    Person(userName = "Philzq",
-        matchPercentage = "34",
+    Person(
+        userName = "Philzq",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = ""
     ),
-    Person(userName = "Philxq",
-        matchPercentage = "34",
+    Person(
+        userName = "Philxq",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = ""
     ),
-    Person(userName = "Phildcq",
-        matchPercentage = "34",
+    Person(
+        userName = "Phildcq",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = ""
     ),
-    Person(userName = "Phildvq",
-        matchPercentage = "34",
+    Person(
+        userName = "Phildvq",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
         region = "MI",
         image = ""
     ),
-    Person(userName = "Phildbq",
-        matchPercentage = "34",
+    Person(
+        userName = "Phildbq",
+        matchPercentage = 34,
         isLiked = false,
         age = 27,
         city = "royal oka",
@@ -207,7 +227,8 @@ fun stubPagedList(
     RxPagedListBuilder<Int, Person>(
         stubDataSourceFactory(
             data
-        ), config)
+        ), config
+    )
         .buildObservable()
 
 

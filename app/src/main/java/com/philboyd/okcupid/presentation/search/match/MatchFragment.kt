@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.philboyd.okcupid.App
 import com.philboyd.okcupid.R
 import com.philboyd.okcupid.presentation.core.attachToLifecycle
 import com.philboyd.okcupid.presentation.search.people.PeopleController
@@ -22,7 +23,11 @@ class MatchFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = MatchViewModel()
+        val appContainer = (requireActivity().application as App).appContainer
+        viewModel = MatchViewModel(
+            appContainer.observeMatchedPeopleUseCase,
+            appContainer.toggleLikedPersonUseCase
+        )
 
         recyclerView.layoutManager = GridLayoutManager(requireContext(), NUMBER_OF_COLUMNS)
         recyclerView.setController(controller)

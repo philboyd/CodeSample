@@ -1,13 +1,16 @@
 package com.philboyd.okcupid.presentation.search.match
 
+import com.philboyd.okcupid.domain.ObserveMatchedPeopleUseCase
 import com.philboyd.okcupid.domain.Person
+import com.philboyd.okcupid.domain.ToggleLikedPersonUseCase
 import com.philboyd.okcupid.presentation.core.ViewModel
 import remotedata.RemoteData
 import remotedata.success
 
 
 class MatchViewModel(
-
+    private val matchedPeopleUseCase: ObserveMatchedPeopleUseCase,
+    private val toggleLikedPersonUseCase: ToggleLikedPersonUseCase
 ) : ViewModel<MatchViewModel.ViewState, MatchViewModel.Action>(
     ViewState(),
     update

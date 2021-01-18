@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
+import com.philboyd.okcupid.App
 import com.philboyd.okcupid.R
 import com.philboyd.okcupid.presentation.core.attachToLifecycle
 import com.philboyd.okcupid.presentation.search.people.PeoplePagedController
@@ -22,10 +23,15 @@ class SpecialBlendFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val appContainer = (requireActivity().application as App).appContainer
+        viewModel = SpecialBlendViewModel(
+            appContainer.observeLikedPeopleUseCase,
+            appContainer.toggleLikedPersonUseCase
+        )
+
         recyclerView.layoutManager = GridLayoutManager(requireContext(), NUMBER_OF_COLUMNS)
         recyclerView.setController(controller)
-        viewModel = SpecialBlendViewModel()
-        viewModel.start()
+        viewModel.stub()
     }
 
     override fun onResume() {
