@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.philboyd.okcupid.App
 import com.philboyd.okcupid.R
+import com.philboyd.okcupid.domain.Person
+import com.philboyd.okcupid.domain.core.toSome
 import com.philboyd.okcupid.presentation.core.attachToLifecycle
 import com.philboyd.okcupid.presentation.search.people.PeopleController
 import com.philboyd.okcupid.presentation.search.people.PersonCallBack
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_match.*
 import remotedata.RemoteData
 
@@ -26,7 +29,8 @@ class MatchFragment :
         val appContainer = (requireActivity().application as App).appContainer
         viewModel = MatchViewModel(
             appContainer.observeMatchedPeopleUseCase,
-            appContainer.toggleLikedPersonUseCase
+            appContainer.toggleLikedPersonUseCase,
+            AndroidSchedulers.mainThread()
         )
 
         recyclerView.layoutManager = GridLayoutManager(requireContext(), NUMBER_OF_COLUMNS)
@@ -36,23 +40,24 @@ class MatchFragment :
     override fun onResume() {
         super.onResume()
 
+        viewModel.start()
+
         viewModel.observe()
             .map { it.topMatches }
             .distinctUntilChanged()
             .subscribe {
-                when (it) {
-                    is RemoteData.Success -> controller.setData(it.data)
-                    RemoteData.NotAsked,
-                    RemoteData.Loading,
-                    is RemoteData.Failure -> {
-                    }
-                }
+                controller.setData(it)
             }
             .attachToLifecycle(this)
     }
 
-    override fun onPersonPressed(id: Int) {
-        viewModel.removeLike(id)
+    override fun onPause() {
+        super.onPause()
+        viewModel.stop()
+    }
+
+    override fun onPersonPressed(person: Person) {
+        viewModel.removeLike(person)
     }
 
     companion object {

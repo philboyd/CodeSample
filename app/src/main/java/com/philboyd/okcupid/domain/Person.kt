@@ -1,9 +1,7 @@
 package com.philboyd.okcupid.domain
 
-import java.util.*
-
 data class Person(
-    val id: Int = UUID.randomUUID().variant(),
+    val id: Int,
     val userName: String,
     val matchPercentage: Int,
     val isLiked: Boolean,

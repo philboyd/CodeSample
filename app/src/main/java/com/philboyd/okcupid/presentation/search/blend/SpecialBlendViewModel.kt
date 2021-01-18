@@ -9,6 +9,7 @@ import com.philboyd.okcupid.domain.Person
 import com.philboyd.okcupid.domain.ToggleLikedPersonUseCase
 import com.philboyd.okcupid.presentation.core.ViewModel
 import io.reactivex.Observable
+import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
@@ -18,18 +19,33 @@ typealias MatchesData = RemoteData<Throwable, PagedList<Person>>
 
 class SpecialBlendViewModel(
     private val likedPersonUseCase: ObserveLikedPeopleUseCase,
-    private val toggleLikedPersonUseCase: ToggleLikedPersonUseCase
+    private val toggleLikedPersonUseCase: ToggleLikedPersonUseCase,
+    private val observerScheduler: Scheduler
 ) : ViewModel<SpecialBlendViewModel.ViewState, SpecialBlendViewModel.Action>(
     ViewState(),
     update
 ) {
 
     data class ViewState(
-        val matches: MatchesData = RemoteData.Loading
+        val matches: MatchesData = RemoteData.Loading,
+        val liked: Set<Int> = emptySet()
     )
 
     sealed class Action {
         data class MatchDataReceived(val data: MatchesData) : Action()
+        data class LikedPeopleReceived(val likedPeople: Set<Person>) : Action()
+    }
+
+    fun start() {
+        likedPersonUseCase.execute()
+            .observeOn(observerScheduler)
+            .subscribeOn(Schedulers.io())
+            .distinctUntilChanged()
+            .subscribe {
+                dispatch(Action.LikedPeopleReceived(it))
+            }
+            .addTo(disposables)
+
     }
 
     fun stub() {
@@ -50,8 +66,8 @@ class SpecialBlendViewModel(
             .addTo(disposables)
     }
 
-    fun toggleLike(id: Int) {
-
+    fun toggleLike(person: Person) {
+        toggleLikedPersonUseCase.execute(person)
     }
 }
 
@@ -61,11 +77,15 @@ private val update: (SpecialBlendViewModel.ViewState, SpecialBlendViewModel.Acti
             is SpecialBlendViewModel.Action.MatchDataReceived -> {
                 state.copy(matches = action.data)
             }
+            is SpecialBlendViewModel.Action.LikedPeopleReceived -> {
+                state.copy(liked = action.likedPeople.map { it.id }.toSet())
+            }
         }
     }
 
 val data = listOf(
     Person(
+        id = 0,
         userName = "Phil",
         matchPercentage = 34,
         isLiked = false,
@@ -76,6 +96,7 @@ val data = listOf(
     ),
 
     Person(
+        id = 1,
         userName = "Philb",
         matchPercentage = 34,
         isLiked = false,
@@ -86,6 +107,7 @@ val data = listOf(
     ),
 
     Person(
+        id = 2,
         userName = "Phil3",
         matchPercentage = 34,
         isLiked = false,
@@ -96,6 +118,7 @@ val data = listOf(
     ),
 
     Person(
+        id = 3,
         userName = "Phild",
         matchPercentage = 34,
         isLiked = false,
@@ -105,6 +128,7 @@ val data = listOf(
         image = "https://k0.okccdn.com/php/load_okc_image.php/images/120x120/120x120/36x36/684x684/2/15743311334557165678.jpg"
     ),
     Person(
+        id = 4,
         userName = "Phila",
         matchPercentage = 34,
         isLiked = false,
@@ -114,6 +138,7 @@ val data = listOf(
         image = "https://k0.okccdn.com/php/load_okc_image.php/images/120x120/120x120/36x36/684x684/2/15743311334557165678.jpg"
     ),
     Person(
+        id = 5,
         userName = "Phild",
         matchPercentage = 34,
         isLiked = false,
@@ -123,6 +148,7 @@ val data = listOf(
         image = ""
     ),
     Person(
+        id = 6,
         userName = "Philz",
         matchPercentage = 34,
         isLiked = false,
@@ -132,6 +158,7 @@ val data = listOf(
         image = ""
     ),
     Person(
+        id = 7,
         userName = "Philx",
         matchPercentage = 34,
         isLiked = false,
@@ -141,6 +168,7 @@ val data = listOf(
         image = ""
     ),
     Person(
+        id = 8,
         userName = "Phildc",
         matchPercentage = 34,
         isLiked = false,
@@ -150,6 +178,7 @@ val data = listOf(
         image = ""
     ),
     Person(
+        id = 9,
         userName = "Phildv",
         matchPercentage = 34,
         isLiked = false,
@@ -159,6 +188,7 @@ val data = listOf(
         image = ""
     ),
     Person(
+        id = 10,
         userName = "Phildb",
         matchPercentage = 34,
         isLiked = false,
@@ -168,6 +198,7 @@ val data = listOf(
         image = ""
     ),
     Person(
+        id = 11,
         userName = "Philzq",
         matchPercentage = 34,
         isLiked = false,
@@ -177,6 +208,7 @@ val data = listOf(
         image = ""
     ),
     Person(
+        id = 12,
         userName = "Philxq",
         matchPercentage = 34,
         isLiked = false,
@@ -186,6 +218,7 @@ val data = listOf(
         image = ""
     ),
     Person(
+        id = 13,
         userName = "Phildcq",
         matchPercentage = 34,
         isLiked = false,
@@ -195,6 +228,7 @@ val data = listOf(
         image = ""
     ),
     Person(
+        id = 14,
         userName = "Phildvq",
         matchPercentage = 34,
         isLiked = false,
@@ -204,6 +238,7 @@ val data = listOf(
         image = ""
     ),
     Person(
+        id = 15,
         userName = "Phildbq",
         matchPercentage = 34,
         isLiked = false,

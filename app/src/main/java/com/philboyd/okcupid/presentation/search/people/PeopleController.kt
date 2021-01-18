@@ -9,7 +9,7 @@ class PeopleController(
 
     override fun buildModels(data: List<Person>?) {
         data?.forEach {
-            PersonModel(it, personCallBack)
+            PersonModel(it, it.isLiked, personCallBack)
                 .id(it.id)
                 .addTo(this)
         }

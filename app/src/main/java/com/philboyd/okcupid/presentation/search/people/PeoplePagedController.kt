@@ -6,7 +6,8 @@ import com.airbnb.epoxy.paging.PagedListEpoxyController
 import com.philboyd.okcupid.domain.Person
 
 class PeoplePagedController(
-    private val personCallBack: PersonCallBack
+    private val personCallBack: PersonCallBack,
+    var likedPeopleIds: Set<Int>
 ) : PagedListEpoxyController<Person>(
     diffingHandler = EpoxyAsyncUtil.getAsyncBackgroundHandler()
 ) {
@@ -15,7 +16,7 @@ class PeoplePagedController(
         return if (item == null) {
             buildPlaceholder(currentPosition)
         } else {
-            PersonModel(item, personCallBack)
+            PersonModel(item, likedPeopleIds.contains(item.id), personCallBack)
                 .id(item.id)
         }
     }
