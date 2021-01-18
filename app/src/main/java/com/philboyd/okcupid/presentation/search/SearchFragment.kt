@@ -3,8 +3,11 @@ package com.philboyd.okcupid.presentation.search
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.philboyd.okcupid.R
+import com.philboyd.okcupid.presentation.search.blend.SpecialBlendFragment
+import com.philboyd.okcupid.presentation.search.match.MatchFragment
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
@@ -38,6 +41,18 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                     MATCH_PERCENTAGE.ordinal -> MATCH_PERCENTAGE
                     else -> throw IllegalArgumentException("Value $value must be in ordinal range of ChildFragment")
                 }
+        }
+    }
+
+    class FragmentAdapter(fragment: SearchFragment) : FragmentStateAdapter(fragment) {
+
+        override fun getItemCount(): Int = SearchFragment.ChildFragment.values().size
+
+        override fun createFragment(position: Int): Fragment {
+            return when (ChildFragment.valueOf(position)) {
+                ChildFragment.SPECIAL_BLEND -> SpecialBlendFragment.newInstance()
+                ChildFragment.MATCH_PERCENTAGE -> MatchFragment.newInstance()
+            }
         }
     }
 }
