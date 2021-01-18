@@ -1,4 +1,4 @@
-package com.philboyd.okcupid.data
+package com.philboyd.okcupid.data.core
 
 import com.jakewharton.rxrelay2.PublishRelay
 import com.jakewharton.rxrelay2.Relay

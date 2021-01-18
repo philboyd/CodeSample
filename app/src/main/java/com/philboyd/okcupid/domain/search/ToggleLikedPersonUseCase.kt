@@ -1,4 +1,7 @@
-package com.philboyd.okcupid.domain
+package com.philboyd.okcupid.domain.search
+
+import com.philboyd.okcupid.domain.search.Person
+import com.philboyd.okcupid.domain.search.PersonRepository
 
 class ToggleLikedPersonUseCase(
     private val personRepository: PersonRepository

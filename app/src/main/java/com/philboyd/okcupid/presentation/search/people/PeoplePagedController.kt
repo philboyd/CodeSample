@@ -3,7 +3,7 @@ package com.philboyd.okcupid.presentation.search.people
 import com.airbnb.epoxy.EpoxyAsyncUtil
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging.PagedListEpoxyController
-import com.philboyd.okcupid.domain.Person
+import com.philboyd.okcupid.domain.search.Person
 
 class PeoplePagedController(
     private val personCallBack: PersonCallBack,

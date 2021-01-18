@@ -7,7 +7,7 @@ import com.airbnb.epoxy.EpoxyModelWithView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.philboyd.okcupid.R
-import com.philboyd.okcupid.domain.Person
+import com.philboyd.okcupid.domain.search.Person
 import com.philboyd.okcupid.presentation.core.inflateAs
 import kotlinx.android.synthetic.main.item_person.view.*
 

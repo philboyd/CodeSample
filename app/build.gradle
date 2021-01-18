@@ -65,6 +65,11 @@ dependencies {
 
     implementation Deps.remoteData
 
+    // Retrofit
+    implementation Deps.Retrofit.core
+    implementation Deps.Retrofit.moshiConverter
+    implementation Deps.Retrofit.rxJavaAdapter
+
     // RxJava
     implementation Deps.RxJava.android
     implementation Deps.RxJava.core

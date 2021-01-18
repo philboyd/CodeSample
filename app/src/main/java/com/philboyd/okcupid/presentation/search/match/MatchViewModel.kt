@@ -1,14 +1,12 @@
 package com.philboyd.okcupid.presentation.search.match
 
-import com.philboyd.okcupid.domain.ObserveMatchedPeopleUseCase
-import com.philboyd.okcupid.domain.Person
-import com.philboyd.okcupid.domain.ToggleLikedPersonUseCase
+import com.philboyd.okcupid.domain.search.ObserveMatchedPeopleUseCase
+import com.philboyd.okcupid.domain.search.Person
+import com.philboyd.okcupid.domain.search.ToggleLikedPersonUseCase
 import com.philboyd.okcupid.presentation.core.ViewModel
 import io.reactivex.Scheduler
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
-import remotedata.RemoteData
-import remotedata.success
 
 
 class MatchViewModel(

@@ -1,7 +1,7 @@
-package com.philboyd.okcupid.data
+package com.philboyd.okcupid.data.search
 
-import com.philboyd.okcupid.domain.Person
-import com.philboyd.okcupid.domain.PersonRepository
+import com.philboyd.okcupid.domain.search.Person
+import com.philboyd.okcupid.domain.search.PersonRepository
 import com.philboyd.okcupid.domain.core.Option
 import com.philboyd.okcupid.domain.core.ReactiveStore
 import io.reactivex.Observable

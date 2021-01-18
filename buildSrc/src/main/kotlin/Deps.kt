@@ -44,6 +44,12 @@ object Deps {
 
     val remoteData = dependency("com.github.torresmi:remotedata", Versions.remoteData)
 
+    object Retrofit : Group("com.squareup.retrofit2") {
+        val core = withArtifact("retrofit", Versions.retrofit)
+        val moshiConverter = withArtifact("converter-moshi", Versions.retrofit)
+        val rxJavaAdapter = withArtifact("adapter-rxjava2", Versions.retrofit)
+    }
+
     object RxJava : Group("io.reactivex.rxjava2") {
         val android = withArtifact("rxandroid", Versions.rxAndroid)
         val core = withArtifact("rxjava", Versions.rxJava)
@@ -89,6 +95,7 @@ object Versions {
     const val paging = "3.0.0-alpha12"
     const val relay = "2.1.1"
     const val remoteData = "1.1"
+    const val retrofit = "2.9.0"
     const val rxAndroid = "2.1.1"
     const val rxJava = "2.2.20"
     const val rxKotlin = "2.4.0"

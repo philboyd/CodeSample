@@ -4,9 +4,9 @@ import androidx.paging.DataSource
 import androidx.paging.PagedList
 import androidx.paging.PositionalDataSource
 import androidx.paging.RxPagedListBuilder
-import com.philboyd.okcupid.domain.ObserveLikedPeopleUseCase
-import com.philboyd.okcupid.domain.Person
-import com.philboyd.okcupid.domain.ToggleLikedPersonUseCase
+import com.philboyd.okcupid.domain.search.ObserveLikedPeopleUseCase
+import com.philboyd.okcupid.domain.search.Person
+import com.philboyd.okcupid.domain.search.ToggleLikedPersonUseCase
 import com.philboyd.okcupid.presentation.core.ViewModel
 import io.reactivex.Observable
 import io.reactivex.Scheduler

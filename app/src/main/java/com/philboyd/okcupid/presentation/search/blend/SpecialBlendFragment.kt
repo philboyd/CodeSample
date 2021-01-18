@@ -6,7 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import com.philboyd.okcupid.App
 import com.philboyd.okcupid.R
-import com.philboyd.okcupid.domain.Person
+import com.philboyd.okcupid.domain.search.Person
 import com.philboyd.okcupid.presentation.core.attachToLifecycle
 import com.philboyd.okcupid.presentation.search.people.PeoplePagedController
 import com.philboyd.okcupid.presentation.search.people.PersonCallBack

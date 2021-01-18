@@ -2,20 +2,16 @@ package com.philboyd.okcupid.presentation.search.match
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.philboyd.okcupid.App
 import com.philboyd.okcupid.R
-import com.philboyd.okcupid.domain.Person
-import com.philboyd.okcupid.domain.core.toSome
+import com.philboyd.okcupid.domain.search.Person
 import com.philboyd.okcupid.presentation.core.attachToLifecycle
 import com.philboyd.okcupid.presentation.search.people.PeopleController
 import com.philboyd.okcupid.presentation.search.people.PersonCallBack
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_match.*
-import remotedata.RemoteData
 
 class MatchFragment :
     Fragment(R.layout.fragment_match),
