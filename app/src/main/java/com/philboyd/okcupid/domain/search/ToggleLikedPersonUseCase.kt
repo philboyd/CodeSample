@@ -4,6 +4,6 @@ class ToggleLikedPersonUseCase(
     private val personRepository: PeopleRepository
 ) {
     fun execute(person: Person) {
-        personRepository.toggleLike(person.copy(isLiked = !person.isLiked))
+        personRepository.toggleLike(person)
     }
 }

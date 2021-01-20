@@ -39,6 +39,7 @@ class SpecialBlendFragment :
             }
             setController(controller)
         }
+        viewModel.start()
     }
 
     override fun onResume() {
@@ -48,13 +49,13 @@ class SpecialBlendFragment :
             .map { it.matches }
             .distinctUntilChanged()
             .subscribe {
-                controller.setData(it.get())
+                if (it.isSuccess()) controller.setData(it.get())
             }
             .attachToLifecycle(this)
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
+        super.onDestroy()
         viewModel.stop()
     }
 

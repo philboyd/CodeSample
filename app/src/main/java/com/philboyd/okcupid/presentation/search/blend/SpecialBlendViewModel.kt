@@ -1,14 +1,16 @@
 package com.philboyd.okcupid.presentation.search.blend
 
-import androidx.paging.PagedList
+import com.philboyd.okcupid.domain.core.RemoteError
 import com.philboyd.okcupid.domain.search.ObservePeopleUseCase
 import com.philboyd.okcupid.domain.search.Person
 import com.philboyd.okcupid.domain.search.ToggleLikedPersonUseCase
 import com.philboyd.okcupid.presentation.core.ViewModel
 import io.reactivex.Scheduler
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.schedulers.Schedulers
 import remotedata.RemoteData
 
-typealias MatchesData = RemoteData<Throwable, PagedList<Person>>
+typealias MatchesData = RemoteData<RemoteError, List<Person>>
 
 class SpecialBlendViewModel(
     private val personUseCase: ObservePeopleUseCase,
@@ -28,7 +30,14 @@ class SpecialBlendViewModel(
     }
 
     fun start() {
-
+        personUseCase.execute()
+            .observeOn(observerScheduler)
+            .subscribeOn(Schedulers.io())
+            .distinctUntilChanged()
+            .subscribe {
+                dispatch(Action.MatchDataReceived(it))
+            }
+            .addTo(disposables)
     }
 
     fun toggleLike(person: Person) {

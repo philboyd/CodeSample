@@ -1,5 +1,6 @@
 package com.philboyd.okcupid.presentation.search.match
 
+import com.philboyd.okcupid.domain.core.RemoteError
 import com.philboyd.okcupid.domain.search.ObserveMatchedPeopleUseCase
 import com.philboyd.okcupid.domain.search.Person
 import com.philboyd.okcupid.domain.search.ToggleLikedPersonUseCase
@@ -7,6 +8,8 @@ import com.philboyd.okcupid.presentation.core.ViewModel
 import io.reactivex.Scheduler
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
+import remotedata.RemoteData
+import remotedata.get
 
 
 class MatchViewModel(
@@ -23,7 +26,7 @@ class MatchViewModel(
     )
 
     sealed class Action {
-        data class TopMatchesReceived(val data: List<Person>) : Action()
+        data class TopMatchesReceived(val data: RemoteData<RemoteError, List<Person>>) : Action()
     }
 
     fun start() {
@@ -45,6 +48,8 @@ class MatchViewModel(
 private val update: (MatchViewModel.ViewState, MatchViewModel.Action) -> MatchViewModel.ViewState =
     { state, action ->
         when (action) {
-            is MatchViewModel.Action.TopMatchesReceived -> state.copy(topMatches = action.data.map { it.copy(isLiked = true) })
+            is MatchViewModel.Action.TopMatchesReceived -> state.copy(
+                topMatches = action.data.get() ?: emptyList()
+            )
         }
     }
