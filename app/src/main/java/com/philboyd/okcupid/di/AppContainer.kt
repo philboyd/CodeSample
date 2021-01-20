@@ -3,32 +3,15 @@ package com.philboyd.okcupid.di
 import com.philboyd.okcupid.data.core.MemoryReactiveStore
 import com.philboyd.okcupid.data.search.*
 import com.philboyd.okcupid.domain.search.*
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import retrofit2.Converter
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class AppContainer {
+    private val networkContainer = NetworkContainer()
 
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("https://okcupid.com")
-        .build()
-
-    private val personService = retrofit.create(SearchApiService::class.java)
-    private val searchNetworkDataSource = SearchNetworkDataSource(personService)
-
-    private val peopleStore: PeopleStore =
-        MemoryReactiveStore<PeopleStoreKey, List<Person>> { PeopleStoreKey }
-    private val personRepository: PeopleRepository =
-        PeopleDataRepository(peopleStore, searchNetworkDataSource)
-
-    val observeLikedPeopleUseCase =
-        ObservePeopleUseCase(
-            personRepository
-        )
-    val observeMatchedPeopleUseCase =
-        ObserveMatchedPeopleUseCase(
-            observeLikedPeopleUseCase
-        )
-    val toggleLikedPersonUseCase =
-        ToggleLikedPersonUseCase(
-            personRepository
-        )
+    val searchContainer = SearchContainer(networkContainer.retrofit)
 }

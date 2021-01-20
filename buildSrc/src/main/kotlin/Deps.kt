@@ -32,6 +32,11 @@ object Deps {
     val material = dependency("com.google.android.material:material", Versions.material)
     val materialValues = dependency("blue.aodev:material-values", Versions.materialValues)
 
+    object Moshi : Group("com.squareup.moshi") {
+        val core = withArtifact("moshi-kotlin", Versions.moshi)
+        val codeGen = withArtifact("moshi-kotlin-codegen", Versions.moshi)
+    }
+
     object Navigation : Group("androidx.navigation") {
         val fragment = Navigation.withArtifact("navigation-fragment-ktx", Versions.navigation)
         val ui = Navigation.withArtifact("navigation-ui-ktx", Versions.navigation)
@@ -91,6 +96,7 @@ object Versions {
     const val material = "1.3.0-alpha02"
     const val materialValues = "1.1.1"
     const val mockk = "1.10.4"
+    const val moshi = "1.11.0"
     const val navigation = "2.3.0"
     const val paging = "3.0.0-alpha12"
     const val relay = "2.1.1"

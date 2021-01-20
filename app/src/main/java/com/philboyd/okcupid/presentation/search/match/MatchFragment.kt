@@ -22,10 +22,10 @@ class MatchFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val appContainer = (requireActivity().application as App).appContainer
+        val searchContainer = (requireActivity().application as App).appContainer.searchContainer
         viewModel = MatchViewModel(
-            appContainer.observeMatchedPeopleUseCase,
-            appContainer.toggleLikedPersonUseCase,
+            searchContainer.observeMatchedPeopleUseCase,
+            searchContainer.toggleLikedPersonUseCase,
             AndroidSchedulers.mainThread()
         )
 

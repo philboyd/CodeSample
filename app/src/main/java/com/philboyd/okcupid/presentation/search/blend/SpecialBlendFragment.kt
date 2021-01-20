@@ -16,8 +16,7 @@ import remotedata.get
 
 class SpecialBlendFragment :
     Fragment(R.layout.fragment_special_blend),
-    PersonCallBack
-{
+    PersonCallBack {
 
     private lateinit var viewModel: SpecialBlendViewModel
     private val controller = PeopleController(this)
@@ -25,10 +24,10 @@ class SpecialBlendFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val appContainer = (requireActivity().application as App).appContainer
+        val searchContainer = (requireActivity().application as App).appContainer.searchContainer
         viewModel = SpecialBlendViewModel(
-            appContainer.observeLikedPeopleUseCase,
-            appContainer.toggleLikedPersonUseCase,
+            searchContainer.observePeopleUseCase,
+            searchContainer.toggleLikedPersonUseCase,
             AndroidSchedulers.mainThread()
         )
         recyclerView.apply {

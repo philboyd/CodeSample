@@ -55,6 +55,9 @@ dependencies {
     implementation Deps.Epoxy.base
     implementation Deps.Epoxy.paging
 
+    // Moshi
+    implementation Deps.Moshi.core
+
     // Navigation
     implementation Deps.Navigation.fragment
     implementation Deps.Navigation.ui
