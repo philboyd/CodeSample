@@ -28,20 +28,22 @@ data class ApiMatchResponse(
     }
 }
 
-private const val MATCH_PERCENTAGE_DENOMINATOR = 10000
-
 fun ApiMatchResponse.toDomain(): RemoteData<RemoteError, List<Person>> = attemptTransform {
     this.data!!.map { it.toDomain() }
 }
 
-fun ApiMatchResponse.ApiPerson.toDomain(): Person =
+private fun ApiMatchResponse.ApiPerson.toDomain(): Person =
     Person(
         id = userid!!,
         userName = username!!,
         age = age!!,
         city = city_name!!,
         region = state_code!!,
-        matchPercentage = match!! / MATCH_PERCENTAGE_DENOMINATOR,
+        matchPercentage = match!!.calculateMatchPercentage(),
         isLiked = liked!!,
         image = photo!!.thumb_paths!!.desktop_match!!
     )
+
+private const val MATCH_PERCENTAGE_DENOMINATOR = 10000
+
+private fun Int.calculateMatchPercentage() = (this * 100) / MATCH_PERCENTAGE_DENOMINATOR

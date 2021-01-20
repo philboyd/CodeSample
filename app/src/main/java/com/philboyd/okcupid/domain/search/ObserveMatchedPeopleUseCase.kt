@@ -21,6 +21,7 @@ class ObserveMatchedPeopleUseCase(
 
     private fun List<Person>.getTopMatches(): List<Person> =
         this.filter { it.isLiked }
+            .sortedByDescending { it.matchPercentage }
             .take(TOP_MATCHES_COUNT)
 
     companion object {
