@@ -84,6 +84,5 @@ class PeopleView : ViewFlipper, PersonCallBack {
         LOADING,
         ERROR,
         SUCCESS,
-
     }
 }

@@ -13,5 +13,4 @@ class SearchNetworkDataSource(private val service: SearchApiService) {
         service.getMatches()
             .map { it.toRemoteData() }
             .map { result -> result.flatMap { it.toDomain() } }
-
 }

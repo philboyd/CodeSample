@@ -3,7 +3,6 @@ package com.philboyd.okcupid.presentation.search.match
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.recyclerview.widget.GridLayoutManager
 import com.philboyd.okcupid.App
 import com.philboyd.okcupid.R
 import com.philboyd.okcupid.domain.search.Person
@@ -27,7 +26,6 @@ class MatchFragment :
             searchContainer.reSyncPeopleUseCase,
             AndroidSchedulers.mainThread()
         )
-
     }
 
     override fun onResume() {

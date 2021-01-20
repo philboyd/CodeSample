@@ -7,5 +7,5 @@ import retrofit2.http.GET
 interface SearchApiService {
 
     @GET("matchSample.json")
-    fun getMatches() : Single<Response<ApiMatchResponse>>
+    fun getMatches(): Single<Response<ApiMatchResponse>>
 }

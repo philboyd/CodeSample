@@ -6,8 +6,8 @@ import io.reactivex.Observable
 import remotedata.RemoteData
 
 interface PeopleRepository {
-    fun observe() : Observable<RemoteData<RemoteError, List<Person>>>
-    fun sync() : Maybe<RemoteError>
+    fun observe(): Observable<RemoteData<RemoteError, List<Person>>>
+    fun sync(): Maybe<RemoteError>
     fun invalidate()
-    fun updatePerson(person: Person,f: (Person) -> Person)
+    fun updatePerson(person: Person, f: (Person) -> Person)
 }

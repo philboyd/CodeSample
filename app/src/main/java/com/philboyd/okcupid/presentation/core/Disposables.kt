@@ -6,7 +6,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 import io.reactivex.disposables.Disposable
 
-
 fun Disposable.attachToLifecycle(owner: LifecycleOwner) {
     owner.lifecycle.addObserver(LifecycleDisposable(this))
 }

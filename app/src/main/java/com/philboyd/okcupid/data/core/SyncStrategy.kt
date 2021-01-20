@@ -10,7 +10,6 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.MaybeSubject
 import remotedata.RemoteData
 
-
 fun <A : Any> Observable<Option<A>>.syncIfEmpty(fetch: Maybe<RemoteError>): Observable<RemoteData<RemoteError, A>> =
     syncIfEmpty(fetch) { SyncError }
 

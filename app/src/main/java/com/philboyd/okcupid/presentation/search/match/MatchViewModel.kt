@@ -12,7 +12,6 @@ import io.reactivex.schedulers.Schedulers
 import remotedata.RemoteData
 import remotedata.get
 
-
 class MatchViewModel(
     private val matchedPeopleUseCase: ObserveMatchedPeopleUseCase,
     private val toggleLikedPersonUseCase: ToggleLikedPersonUseCase,

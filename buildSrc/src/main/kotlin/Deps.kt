@@ -21,7 +21,6 @@ object Deps {
         val paging = withArtifact("epoxy-paging", Versions.epoxy)
     }
 
-
     object Glide : Group("com.github.bumptech.glide") {
         val core = withArtifact("glide", Versions.glide)
         val compiler = withArtifact("compiler", Versions.glide)
@@ -68,7 +67,6 @@ object Deps {
     }
 
     val viewpager2 = dependency("androidx.viewpager2:viewpager2", Versions.viewpager2)
-
 }
 
 abstract class Group(val group: String) {
@@ -103,5 +101,4 @@ object Versions {
     const val rxJava = "2.2.20"
     const val rxKotlin = "2.4.0"
     const val viewpager2 = "1.0.0"
-
 }
