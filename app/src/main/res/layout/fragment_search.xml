@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/blue_200"
-        android:elevation="4dp" />
+        android:elevation="@dimen/material_elevation_app_bar" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
