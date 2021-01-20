@@ -22,11 +22,11 @@ class PeopleDataRepository(
             .doIfSuccess { personStore.store(it) }
             .flatMapMaybe { it.toMaybeError() }
 
-    override fun toggleLike(person: Person) {
+    override fun updatePerson(person: Person, f: (Person) -> Person) {
         personStore.update(PeopleStoreKey) {
             val people = it?.toMutableList() ?: mutableListOf()
             val index = people.indexOf(person)
-            if (index >= 0) people[index] = person.copy(isLiked = !person.isLiked)
+            if (index >= 0) people[index] = f(person)
             people
         }
     }
