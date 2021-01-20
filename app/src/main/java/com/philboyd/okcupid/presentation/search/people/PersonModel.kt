@@ -29,8 +29,9 @@ data class PersonModel(
 
             Glide.with(context)
                 .load(person.image)
-                .transition(DrawableTransitionOptions.withCrossFade(FADE_DURATION))
-                .placeholder(R.drawable.ic_person_placeholder)
+                .fitCenter()
+                .dontAnimate()
+                .placeholder(R.color.grey)
                 .into(personImage)
 
             val backgroundColor =

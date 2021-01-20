@@ -22,7 +22,7 @@ data class ApiMatchResponse(
             val thumb_paths: ApiThumbPaths? = null
         ) {
             data class ApiThumbPaths(
-                val large: String? = null
+                val desktop_match: String? = null
             )
         }
     }
@@ -43,5 +43,5 @@ fun ApiMatchResponse.ApiPerson.toDomain(): Person =
         region = state_code!!,
         matchPercentage = match!! / MATCH_PERCENTAGE_DENOMINATOR,
         isLiked = liked!!,
-        image = photo!!.thumb_paths!!.large!!
+        image = photo!!.thumb_paths!!.desktop_match!!
     )

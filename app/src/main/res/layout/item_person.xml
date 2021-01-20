@@ -17,10 +17,9 @@
             android:id="@+id/personImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="top"
             android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_person_placeholder"/>
+            tools:src="@tools:sample/avatars"/>
 
         <TextView
             android:id="@+id/personUsername"
@@ -36,7 +35,6 @@
             style="@style/TextBody2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             tools:text="29 Teaneck, NJ" />
 
         <TextView
@@ -44,7 +42,7 @@
             style="@style/TextBody1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             tools:text="47% Match" />
 
