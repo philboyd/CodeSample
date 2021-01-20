@@ -1,17 +1,27 @@
 package com.philboyd.okcupid.domain.search
 
+import com.philboyd.okcupid.domain.core.RemoteError
 import io.reactivex.Observable
+import remotedata.RemoteData
+import remotedata.success
 
 class ObserveMatchedPeopleUseCase(
-    private val observeLikedPeopleUseCase: ObserveLikedPeopleUseCase
+    private val observePeopleUseCase: ObservePeopleUseCase
 ) {
 
-    fun execute(): Observable<List<Person>> =
-        observeLikedPeopleUseCase.execute()
-            .map { it.toList() }
-            .map { it.sortedBy { it.matchPercentage } }
-            .map { it.take(TOP_MATCHES_COUNT) }
+    fun execute(): Observable<RemoteData<RemoteError, List<Person>>> =
+        observePeopleUseCase.execute()
+            .map { it.mapToTopMatches() }
 
+    private fun RemoteData<RemoteError, List<Person>>.mapToTopMatches(): RemoteData<RemoteError, List<Person>> =
+        when (this) {
+            is RemoteData.Success -> this.data.getTopMatches().success()
+            else -> this
+        }
+
+    private fun List<Person>.getTopMatches(): List<Person> =
+        this.filter { it.isLiked }
+            .take(TOP_MATCHES_COUNT)
 
     companion object {
         private const val TOP_MATCHES_COUNT = 6

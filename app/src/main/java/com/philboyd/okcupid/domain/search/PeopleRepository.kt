@@ -8,4 +8,5 @@ import remotedata.RemoteData
 interface PeopleRepository {
     fun observe() : Observable<RemoteData<RemoteError, List<Person>>>
     fun sync() : Maybe<RemoteError>
+    fun toggleLike(person: Person)
 }

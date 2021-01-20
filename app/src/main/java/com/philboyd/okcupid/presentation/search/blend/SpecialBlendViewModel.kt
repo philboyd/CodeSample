@@ -1,24 +1,17 @@
 package com.philboyd.okcupid.presentation.search.blend
 
-import androidx.paging.DataSource
 import androidx.paging.PagedList
-import androidx.paging.PositionalDataSource
-import androidx.paging.RxPagedListBuilder
-import com.philboyd.okcupid.domain.search.ObserveLikedPeopleUseCase
+import com.philboyd.okcupid.domain.search.ObservePeopleUseCase
 import com.philboyd.okcupid.domain.search.Person
 import com.philboyd.okcupid.domain.search.ToggleLikedPersonUseCase
 import com.philboyd.okcupid.presentation.core.ViewModel
-import io.reactivex.Observable
 import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
 import remotedata.RemoteData
 
 typealias MatchesData = RemoteData<Throwable, PagedList<Person>>
 
 class SpecialBlendViewModel(
-    private val likedPersonUseCase: ObserveLikedPeopleUseCase,
+    private val personUseCase: ObservePeopleUseCase,
     private val toggleLikedPersonUseCase: ToggleLikedPersonUseCase,
     private val observerScheduler: Scheduler
 ) : ViewModel<SpecialBlendViewModel.ViewState, SpecialBlendViewModel.Action>(

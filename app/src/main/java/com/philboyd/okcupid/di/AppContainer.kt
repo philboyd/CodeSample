@@ -2,7 +2,6 @@ package com.philboyd.okcupid.di
 
 import com.philboyd.okcupid.data.core.MemoryReactiveStore
 import com.philboyd.okcupid.data.search.*
-import com.philboyd.okcupid.domain.core.ReactiveStore
 import com.philboyd.okcupid.domain.search.*
 import retrofit2.Retrofit
 
@@ -21,7 +20,7 @@ class AppContainer {
         PeopleDataRepository(peopleStore, searchNetworkDataSource)
 
     val observeLikedPeopleUseCase =
-        ObserveLikedPeopleUseCase(
+        ObservePeopleUseCase(
             personRepository
         )
     val observeMatchedPeopleUseCase =

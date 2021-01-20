@@ -13,13 +13,22 @@ class PeopleDataRepository(
     private val networkDataSource: SearchNetworkDataSource
 ) : PeopleRepository {
 
-    override fun observe() : Observable<RemoteData<RemoteError, List<Person>>> =
+    override fun observe(): Observable<RemoteData<RemoteError, List<Person>>> =
         personStore.get(PeopleStoreKey)
             .syncIfEmpty(sync())
 
-    override fun sync() : Maybe<RemoteError> =
+    override fun sync(): Maybe<RemoteError> =
         networkDataSource.getMatches()
             .doIfSuccess { personStore.store(it) }
             .flatMapMaybe { it.toMaybeError() }
+
+    override fun toggleLike(person: Person) {
+        personStore.update(PeopleStoreKey) {
+            val people = it?.toMutableList() ?: mutableListOf()
+            val index = people.indexOf(person)
+            if (index >= 0) people[index] = person.copy(isLiked = !person.isLiked)
+            people
+        }
+    }
 
 }
