@@ -15,7 +15,6 @@ private const val FADE_DURATION = 200
 
 data class PersonModel(
     val person: Person,
-    val isLiked: Boolean,
     val callBack: PersonCallBack
 ) : EpoxyModelWithView<CardView>() {
 
@@ -35,7 +34,7 @@ data class PersonModel(
                 .into(personImage)
 
             val backgroundColor =
-                if (isLiked) R.color.people_card_liked else R.color.people_card_not_liked
+                if (person.isLiked) R.color.people_card_liked else R.color.people_card_not_liked
             setCardBackgroundColor(ContextCompat.getColor(view.context, backgroundColor))
 
             setOnClickListener { callBack.onPersonPressed(person) }

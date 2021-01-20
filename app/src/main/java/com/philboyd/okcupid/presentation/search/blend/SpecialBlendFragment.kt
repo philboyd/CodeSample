@@ -8,7 +8,7 @@ import com.philboyd.okcupid.App
 import com.philboyd.okcupid.R
 import com.philboyd.okcupid.domain.search.Person
 import com.philboyd.okcupid.presentation.core.attachToLifecycle
-import com.philboyd.okcupid.presentation.search.people.PeoplePagedController
+import com.philboyd.okcupid.presentation.search.people.PeopleController
 import com.philboyd.okcupid.presentation.search.people.PersonCallBack
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.fragment_match.*
@@ -20,7 +20,7 @@ class SpecialBlendFragment :
 {
 
     private lateinit var viewModel: SpecialBlendViewModel
-    private val controller = PeoplePagedController(this, emptySet())
+    private val controller = PeopleController(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,34 +40,23 @@ class SpecialBlendFragment :
             }
             setController(controller)
         }
-        viewModel.stub()
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.start()
 
         viewModel.observe()
             .map { it.matches }
             .distinctUntilChanged()
             .subscribe {
-                controller.submitList(it.get())
-            }
-            .attachToLifecycle(this)
-
-        viewModel.observe()
-            .map { it.liked }
-            .distinctUntilChanged()
-            .subscribe {
-                controller.likedPeopleIds = it
-                controller.requestForcedModelBuild()
+                controller.setData(it.get())
             }
             .attachToLifecycle(this)
     }
 
     override fun onPause() {
         super.onPause()
-        viewModel.stub()
+        viewModel.stop()
     }
 
     override fun onPersonPressed(person: Person) {

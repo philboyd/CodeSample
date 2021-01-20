@@ -1,5 +1,7 @@
 package com.philboyd.okcupid.domain.core
 
+import remotedata.RemoteData
+
 sealed class Option<out A : Any> {
 
     object None : Option<Nothing>()
@@ -50,3 +52,9 @@ fun <A : Any> Option<A>.orNull(): A? = when (this) {
     is Option.None -> null
     is Option.Some -> value
 }
+
+fun <E : Any, A : Any> Option<A>.toRemoteData(emptyValue: RemoteData<E, A> = RemoteData.Loading): RemoteData<E, A> =
+    when (this) {
+        is Option.None -> emptyValue
+        is Option.Some -> RemoteData.succeed(value)
+    }

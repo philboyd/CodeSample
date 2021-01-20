@@ -1,7 +1,7 @@
 package com.philboyd.okcupid.domain.search
 
 data class Person(
-    val id: Int,
+    val id: String,
     val userName: String,
     val matchPercentage: Int,
     val isLiked: Boolean,
