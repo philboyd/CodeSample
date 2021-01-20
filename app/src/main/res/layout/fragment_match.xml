@@ -6,9 +6,6 @@
     android:background="@color/list_background"
     tools:context=".presentation.search.match.MatchFragment">
 
-    <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/view_people" />
 
 </FrameLayout>

@@ -8,16 +8,14 @@ import com.philboyd.okcupid.App
 import com.philboyd.okcupid.R
 import com.philboyd.okcupid.domain.search.Person
 import com.philboyd.okcupid.presentation.core.attachToLifecycle
-import com.philboyd.okcupid.presentation.search.people.PeopleController
-import com.philboyd.okcupid.presentation.search.people.PersonCallBack
+import com.philboyd.okcupid.presentation.search.people.PeopleView
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.fragment_match.*
+import kotlinx.android.synthetic.main.view_people.*
 
 class MatchFragment :
     Fragment(R.layout.fragment_match),
-    PersonCallBack {
+    PeopleView.Callback {
     private lateinit var viewModel: MatchViewModel
-    private val controller = PeopleController(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,11 +24,10 @@ class MatchFragment :
         viewModel = MatchViewModel(
             searchContainer.observeMatchedPeopleUseCase,
             searchContainer.toggleLikedPersonUseCase,
+            searchContainer.reSyncPeopleUseCase,
             AndroidSchedulers.mainThread()
         )
 
-        recyclerView.layoutManager = GridLayoutManager(requireContext(), NUMBER_OF_COLUMNS)
-        recyclerView.setController(controller)
     }
 
     override fun onResume() {
@@ -42,7 +39,7 @@ class MatchFragment :
             .map { it.topMatches }
             .distinctUntilChanged()
             .subscribe {
-                controller.setData(it)
+                peopleView.bind(it, this)
             }
             .attachToLifecycle(this)
     }
@@ -52,13 +49,15 @@ class MatchFragment :
         viewModel.stop()
     }
 
-    override fun onPersonPressed(person: Person) {
+    override fun personPressed(person: Person) {
         viewModel.removeLike(person)
     }
 
-    companion object {
-        private const val NUMBER_OF_COLUMNS = 2
+    override fun retryPressed() {
+        viewModel.retry()
+    }
 
+    companion object {
         fun newInstance() = MatchFragment()
     }
 }
