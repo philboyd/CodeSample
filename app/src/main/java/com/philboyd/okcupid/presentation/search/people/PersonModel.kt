@@ -5,13 +5,11 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.EpoxyModelWithView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.philboyd.okcupid.R
 import com.philboyd.okcupid.domain.search.Person
 import com.philboyd.okcupid.presentation.core.inflateAs
+import com.squareup.phrase.Phrase
 import kotlinx.android.synthetic.main.item_person.view.*
-
-private const val FADE_DURATION = 200
 
 data class PersonModel(
     val person: Person,
@@ -21,10 +19,17 @@ data class PersonModel(
     override fun bind(view: CardView) {
         super.bind(view)
 
-        // TODO use string resources, add Phrase
         with(view) {
-            personStats.text = "${person.age} ${person.city}, ${person.region}"
-            matchPercentage.text = "${person.matchPercentage}% Match"
+            personStats.text = Phrase.from(context, R.string.person_details)
+                .put("age", person.age)
+                .put("city", person.city)
+                .put("region", person.region)
+                .format()
+
+            matchPercentage.text = Phrase.from(context, R.string.person_match_percentage)
+                .put("match", person.matchPercentage)
+                .format()
+
             personUsername.text = person.userName
 
             Glide.with(context)

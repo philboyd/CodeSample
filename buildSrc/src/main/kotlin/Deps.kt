@@ -42,10 +42,7 @@ object Deps {
         val ui = Navigation.withArtifact("navigation-ui-ktx", Versions.navigation)
     }
 
-    object Paging : Group("androidx.paging") {
-        val core = Paging.withArtifact("paging-runtime", Versions.paging)
-        val rx = Paging.withArtifact("paging-rxjava2", Versions.paging)
-    }
+    val phrase = dependency("com.squareup.phrase:phrase", Versions.phrase)
 
     val remoteData = dependency("com.github.torresmi:remotedata", Versions.remoteData)
 
@@ -98,7 +95,7 @@ object Versions {
     const val mockk = "1.10.4"
     const val moshi = "1.11.0"
     const val navigation = "2.3.0"
-    const val paging = "3.0.0-alpha12"
+    const val phrase = "1.1.0"
     const val relay = "2.1.1"
     const val remoteData = "1.1"
     const val retrofit = "2.9.0"

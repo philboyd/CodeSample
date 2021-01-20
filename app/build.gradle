@@ -62,9 +62,7 @@ dependencies {
     implementation Deps.Navigation.fragment
     implementation Deps.Navigation.ui
 
-    // Paging
-    implementation Deps.Paging.core
-    implementation Deps.Paging.rx
+    implementation Deps.phrase
 
     implementation Deps.remoteData
 
@@ -78,9 +76,6 @@ dependencies {
     implementation Deps.RxJava.core
     implementation Deps.RxJava.kotlin
     implementation Deps.rxRelay
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.appmattus.fixture:fixture:1.0.0'
 
     // Testing
     testImplementation Deps.Test.junit
