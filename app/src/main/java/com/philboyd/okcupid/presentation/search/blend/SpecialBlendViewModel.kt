@@ -3,6 +3,7 @@ package com.philboyd.okcupid.presentation.search.blend
 import com.philboyd.okcupid.domain.core.RemoteError
 import com.philboyd.okcupid.domain.search.ObservePeopleUseCase
 import com.philboyd.okcupid.domain.search.Person
+import com.philboyd.okcupid.domain.search.ReSyncPeopleUseCase
 import com.philboyd.okcupid.domain.search.ToggleLikedPersonUseCase
 import com.philboyd.okcupid.presentation.core.ViewModel
 import io.reactivex.Scheduler
@@ -15,6 +16,7 @@ typealias MatchesData = RemoteData<RemoteError, List<Person>>
 class SpecialBlendViewModel(
     private val personUseCase: ObservePeopleUseCase,
     private val toggleLikedPersonUseCase: ToggleLikedPersonUseCase,
+    private val resyncPeopleUseCase: ReSyncPeopleUseCase,
     private val observerScheduler: Scheduler
 ) : ViewModel<SpecialBlendViewModel.ViewState, SpecialBlendViewModel.Action>(
     ViewState(),
@@ -38,6 +40,12 @@ class SpecialBlendViewModel(
                 dispatch(Action.MatchDataReceived(it))
             }
             .addTo(disposables)
+    }
+
+    fun retry() {
+        resyncPeopleUseCase.execute()
+        disposables.clear()
+        start()
     }
 
     fun toggleLike(person: Person) {

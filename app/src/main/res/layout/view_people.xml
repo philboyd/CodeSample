@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.philboyd.okcupid.presentation.search.people.PeopleView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/peopleView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
+
+    <include layout="@layout/view_fetch_error" />
+
+    <com.airbnb.epoxy.EpoxyRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</com.philboyd.okcupid.presentation.search.people.PeopleView>

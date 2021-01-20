@@ -3,23 +3,21 @@ package com.philboyd.okcupid.presentation.search.blend
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
-import androidx.recyclerview.widget.GridLayoutManager
 import com.philboyd.okcupid.App
 import com.philboyd.okcupid.R
+import com.philboyd.okcupid.domain.core.SyncError
 import com.philboyd.okcupid.domain.search.Person
 import com.philboyd.okcupid.presentation.core.attachToLifecycle
-import com.philboyd.okcupid.presentation.search.people.PeopleController
-import com.philboyd.okcupid.presentation.search.people.PersonCallBack
+import com.philboyd.okcupid.presentation.search.people.PeopleView
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.fragment_match.*
-import remotedata.get
+import kotlinx.android.synthetic.main.view_people.*
+import remotedata.RemoteData
 
 class SpecialBlendFragment :
     Fragment(R.layout.fragment_special_blend),
-    PersonCallBack {
+    PeopleView.Callback {
 
     private lateinit var viewModel: SpecialBlendViewModel
-    private val controller = PeopleController(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,17 +26,9 @@ class SpecialBlendFragment :
         viewModel = SpecialBlendViewModel(
             searchContainer.observePeopleUseCase,
             searchContainer.toggleLikedPersonUseCase,
+            searchContainer.reSyncPeopleUseCase,
             AndroidSchedulers.mainThread()
         )
-        recyclerView.apply {
-            layoutManager = GridLayoutManager(requireContext(), NUMBER_OF_COLUMNS)
-            itemAnimator?.apply {
-                moveDuration = 0L
-                addDuration = 0L
-                removeDuration = 0L
-            }
-            setController(controller)
-        }
         viewModel.start()
     }
 
@@ -49,7 +39,7 @@ class SpecialBlendFragment :
             .map { it.matches }
             .distinctUntilChanged()
             .subscribe {
-                if (it.isSuccess()) controller.setData(it.get())
+                peopleView.bind(it, this)
             }
             .attachToLifecycle(this)
     }
@@ -59,13 +49,15 @@ class SpecialBlendFragment :
         viewModel.stop()
     }
 
-    override fun onPersonPressed(person: Person) {
+    override fun personPressed(person: Person) {
         viewModel.toggleLike(person)
     }
 
-    companion object {
-        private const val NUMBER_OF_COLUMNS = 2
+    override fun retryPressed() {
+        viewModel.retry()
+    }
 
+    companion object {
         fun newInstance() = SpecialBlendFragment()
     }
 }

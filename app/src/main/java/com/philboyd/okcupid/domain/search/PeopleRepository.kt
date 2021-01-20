@@ -8,5 +8,6 @@ import remotedata.RemoteData
 interface PeopleRepository {
     fun observe() : Observable<RemoteData<RemoteError, List<Person>>>
     fun sync() : Maybe<RemoteError>
+    fun invalidate()
     fun updatePerson(person: Person,f: (Person) -> Person)
 }

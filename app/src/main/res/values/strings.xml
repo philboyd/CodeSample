@@ -7,4 +7,7 @@
 
     <string name="person_details">{age} {city}, {region}</string>
     <string name="person_match_percentage">{match}% Match</string>
+
+    <string name="error_text">There was an error fetching your results.</string>
+    <string name="error_retry">Retry</string>
 </resources>

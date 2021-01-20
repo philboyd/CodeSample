@@ -14,16 +14,8 @@ class SearchContainer(retrofit: Retrofit) {
     private val personRepository: PeopleRepository =
         PeopleDataRepository(peopleStore, searchNetworkDataSource)
 
-    val observePeopleUseCase =
-        ObservePeopleUseCase(
-            personRepository
-        )
-    val observeMatchedPeopleUseCase =
-        ObserveMatchedPeopleUseCase(
-            observePeopleUseCase
-        )
-    val toggleLikedPersonUseCase =
-        ToggleLikedPersonUseCase(
-            personRepository
-        )
+    val observePeopleUseCase = ObservePeopleUseCase(personRepository)
+    val observeMatchedPeopleUseCase = ObserveMatchedPeopleUseCase(observePeopleUseCase)
+    val toggleLikedPersonUseCase = ToggleLikedPersonUseCase(personRepository)
+    val reSyncPeopleUseCase = ReSyncPeopleUseCase(personRepository)
 }

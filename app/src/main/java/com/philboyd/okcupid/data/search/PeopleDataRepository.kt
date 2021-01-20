@@ -22,6 +22,11 @@ class PeopleDataRepository(
             .doIfSuccess { personStore.store(it) }
             .flatMapMaybe { it.toMaybeError() }
 
+    override fun invalidate() {
+        personStore.clear()
+        sync()
+    }
+
     override fun updatePerson(person: Person, f: (Person) -> Person) {
         personStore.update(PeopleStoreKey) {
             val people = it?.toMutableList() ?: mutableListOf()
