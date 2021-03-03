@@ -18,6 +18,7 @@ object Deps {
 
     object Epoxy : Group("com.airbnb.android") {
         val base = withArtifact("epoxy", Versions.epoxy)
+        val dataBinding = withArtifact("epoxy-databinding", Versions.epoxy)
         val paging = withArtifact("epoxy-paging", Versions.epoxy)
     }
 
