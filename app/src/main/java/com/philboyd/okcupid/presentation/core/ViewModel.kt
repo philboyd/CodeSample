@@ -1,5 +1,6 @@
 package com.philboyd.okcupid.presentation.core
 
+import androidx.databinding.BaseObservable
 import com.jakewharton.rxrelay2.BehaviorRelay
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
@@ -9,7 +10,7 @@ import kotlin.properties.Delegates
 abstract class ViewModel<ViewState : Any, Action : Any>(
     initialState: ViewState,
     val update: (ViewState, Action) -> ViewState
-) {
+) : BaseObservable() {
 
     val disposables = CompositeDisposable()
 

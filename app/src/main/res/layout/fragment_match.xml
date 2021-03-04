@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/list_background"
-    tools:context=".presentation.search.match.MatchFragment">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <include layout="@layout/view_people" />
+    <data>
 
-</FrameLayout>
+        <variable
+            name="viewModel"
+            type="com.philboyd.okcupid.presentation.search.match.MatchViewModel" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/list_background"
+        tools:context=".presentation.search.match.MatchFragment">
+
+        <include
+            android:id="@+id/view_people"
+            layout="@layout/view_people"
+            app:people="@{viewModel.topMatches}"
+            app:callback="@{viewModel}"/>
+
+    </FrameLayout>
+</layout>

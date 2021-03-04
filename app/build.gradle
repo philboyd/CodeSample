@@ -50,6 +50,9 @@ dependencies {
     implementation Deps.constraintLayout
     implementation Deps.viewpager2
 
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
+
     // Glide
     implementation Deps.Glide.core
     kapt Deps.Glide.compiler

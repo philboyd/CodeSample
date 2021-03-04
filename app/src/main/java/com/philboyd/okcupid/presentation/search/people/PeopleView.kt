@@ -3,6 +3,7 @@ package com.philboyd.okcupid.presentation.search.people
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.ViewFlipper
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import com.philboyd.okcupid.domain.core.RemoteError
 import com.philboyd.okcupid.domain.search.Person
@@ -16,7 +17,7 @@ class PeopleView : ViewFlipper, PersonCallBack {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
-    private lateinit var callBack: Callback
+    lateinit var callBack: Callback
 
     private val controller = PeopleController(this)
     private val gridLayoutManager = GridLayoutManager(context, NUMBER_OF_COLUMNS)
@@ -42,7 +43,10 @@ class PeopleView : ViewFlipper, PersonCallBack {
 
     fun bind(peopleData: RemoteData<RemoteError, List<Person>>, peopleViewCallback: Callback) {
         callBack = peopleViewCallback
+        bindPeople(peopleData)
+    }
 
+    fun bindPeople(peopleData: RemoteData<RemoteError, List<Person>>) {
         when (peopleData) {
             RemoteData.NotAsked -> renderNotAsked()
             RemoteData.Loading -> renderLoading()
@@ -86,3 +90,17 @@ class PeopleView : ViewFlipper, PersonCallBack {
         SUCCESS,
     }
 }
+
+@BindingAdapter("peopleData")
+fun PeopleView.bindPeopleData(peopleWrapper: PeopleWrapper) {
+    this.bindPeople(peopleWrapper.peopleData)
+}
+
+@BindingAdapter("callback")
+fun PeopleView.bindCallback(callBack: PeopleView.Callback) {
+    this.callBack = callBack
+}
+
+data class PeopleWrapper(
+    val peopleData: RemoteData<RemoteError, List<Person>>
+)

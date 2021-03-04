@@ -1,24 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.philboyd.okcupid.presentation.search.people.PeopleView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/peopleView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <View
+    <data>
+
+        <variable
+            name="callback"
+            type="com.philboyd.okcupid.presentation.search.people.PeopleView.Callback" />
+
+        <variable
+            name="people"
+            type="com.philboyd.okcupid.presentation.search.people.PeopleWrapper" />
+    </data>
+
+    <com.philboyd.okcupid.presentation.search.people.PeopleView
+        android:id="@+id/peopleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:peopleData="@{people}"
+        app:callback="@{callback}">
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <include layout="@layout/view_fetch_error" />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
-    <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <include layout="@layout/view_fetch_error" />
 
-</com.philboyd.okcupid.presentation.search.people.PeopleView>
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.philboyd.okcupid.presentation.search.people.PeopleView>
+
+</layout>
